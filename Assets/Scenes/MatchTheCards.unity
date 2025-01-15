@@ -777,7 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topImageRect: {fileID: 2062963898}
   bottomImageRect: {fileID: 970154571}
-  canvas: {fileID: 0}
+  canvas: {fileID: 203920788}
 --- !u!1 &2062963897
 GameObject:
   m_ObjectHideFlags: 0
