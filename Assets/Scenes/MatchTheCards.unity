@@ -599,7 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.8, g: 0.42745098, b: 0.42745098, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -633,6 +633,10 @@ PrefabInstance:
     - target: {fileID: 2478382999672612809, guid: ddd50222978a446418f227f5cf984a2d, type: 3}
       propertyPath: m_Name
       value: LevelCompleteEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478382999672612809, guid: ddd50222978a446418f227f5cf984a2d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2478382999672612810, guid: ddd50222978a446418f227f5cf984a2d, type: 3}
       propertyPath: m_Pivot.x
@@ -773,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topImageRect: {fileID: 2062963898}
   bottomImageRect: {fileID: 970154571}
+  canvas: {fileID: 0}
 --- !u!1 &2062963897
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.8, g: 0.42745098, b: 0.42745098, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

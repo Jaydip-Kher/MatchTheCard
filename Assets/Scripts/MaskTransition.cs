@@ -1,20 +1,17 @@
 using DG.Tweening;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 using System.Collections;
 
 public class MaskTransition : MonoBehaviour
 {
-    internal float defaultScale = 2;
-
-    public RectTransform topImageRect;
-    public RectTransform bottomImageRect;
+    [SerializeField] private RectTransform topImageRect;
+    [SerializeField] private RectTransform bottomImageRect;
+    [SerializeField] private Canvas canvas;
 
     private void OnEnable()
     {
-   
     }
+
     private void OnDisable()
     {
     }
@@ -22,64 +19,64 @@ public class MaskTransition : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
-            FadeIn();
+            MoveIn();
 
         if (Input.GetKeyDown(KeyCode.O))
-            FadeOut();
+            MoveOut();
     }
 
-    public void FadeOut()
+    public void MoveOut()
     {
         StartCoroutine(CompleteLevelTransitionOut());
     }
 
-    public void FadeIn()
+    public void MoveIn()
     {
         CompleteLevelTransitionIn();
     }
 
     public void CompleteLevelTransitionIn()
     {
-        topImageRect.anchoredPosition = new Vector2(0, Screen.height);  // Start at the top
-        Vector2 topTargetPosition = new Vector2(0, Screen.height / 4); // Move to the middle of the screen
+        SetImageSizeAtRuntime();
 
-        bottomImageRect.anchoredPosition = new Vector2(0, -Screen.height); // Start at the bottom
-        Vector2 bottomTargetPosition = new Vector2(0, -Screen.height / 4); // Move to the middle of the screen
+        topImageRect.anchoredPosition = new Vector2(0, GetScreenHeight());
+        Vector2 topTargetPosition = new Vector2(0, GetScreenHeight() / 4); // Target the center
 
-        topImageRect.DOAnchorPos(topTargetPosition, 0.5f)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-            });
+        bottomImageRect.anchoredPosition = new Vector2(0, -GetScreenHeight());
+        Vector2 bottomTargetPosition = new Vector2(0, -GetScreenHeight() / 4); // Target the center
 
-        bottomImageRect.DOAnchorPos(bottomTargetPosition, 0.5f)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-            });
+        topImageRect.DOAnchorPos(topTargetPosition, 0.5f).SetEase(Ease.OutQuad);
+        bottomImageRect.DOAnchorPos(bottomTargetPosition, 0.5f).SetEase(Ease.OutQuad);
     }
 
     IEnumerator CompleteLevelTransitionOut()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f); // Optional delay
 
-        topImageRect.anchoredPosition = new Vector2(0, Screen.height / 4);  // Start at the top
-        Vector2 topTargetPosition = new Vector2(0, Screen.height); // Move to the middle of the screen
+        SetImageSizeAtRuntime();
+        topImageRect.anchoredPosition = new Vector2(0, GetScreenHeight() / 4);
+        Vector2 topTargetPosition = new Vector2(0, GetScreenHeight()); // Move to the top off-screen
 
-        bottomImageRect.anchoredPosition = new Vector2(0, -Screen.height / 4); // Start at the bottom
-        Vector2 bottomTargetPosition = new Vector2(0, -Screen.height); // Move to the middle of the screen
+        bottomImageRect.anchoredPosition = new Vector2(0, -GetScreenHeight() / 4);
+        Vector2 bottomTargetPosition = new Vector2(0, -GetScreenHeight()); // Move to the bottom off-screen
 
-        topImageRect.DOAnchorPos(topTargetPosition, 1f)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-            });
+        topImageRect.DOAnchorPos(topTargetPosition, 1f).SetEase(Ease.OutQuad);
+        bottomImageRect.DOAnchorPos(bottomTargetPosition, 1f).SetEase(Ease.OutQuad);
+    }
 
-        bottomImageRect.DOAnchorPos(bottomTargetPosition, 1f)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-               
-            });
+    private void SetImageSizeAtRuntime()
+    {
+        topImageRect.sizeDelta = new Vector2(GetScreenWidth(), GetScreenHeight() / 2);
+        bottomImageRect.sizeDelta = new Vector2(GetScreenWidth(), GetScreenHeight() / 2);
+    }
+
+    private float GetScreenHeight()
+    {
+        return canvas.GetComponent<RectTransform>().rect.height;
+    }
+
+    private float GetScreenWidth()
+    {
+        return canvas.GetComponent<RectTransform>().rect.width;
     }
 }
