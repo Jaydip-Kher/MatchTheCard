@@ -36,14 +36,13 @@ public class PlayerController : Singleton<PlayerController>
         {
             string json = File.ReadAllText(filePath);
             currentUserdData= JsonUtility.FromJson<UserData>(json);
-            //currentLevel = currentUserdData.level;
-            currentLevel = 0;
+            currentLevel = currentUserdData.level;
             score = currentUserdData.score;
         }
-        /*else
+        else
         {
-            SaveData(currentLevel,ScoreConfigManager.Instance.GetCurrentScore());
-        }*/
+            SaveData(currentLevel,ScoreConfigController.Instance.GetCurrentScore());
+        }
     }
 }
 [System.Serializable]

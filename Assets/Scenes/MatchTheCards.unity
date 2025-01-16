@@ -2335,7 +2335,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 203920790}
         m_TargetAssemblyTypeName: GamePlayView, Assembly-CSharp
-        m_MethodName: ToggleSound
+        m_MethodName: ToggleMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

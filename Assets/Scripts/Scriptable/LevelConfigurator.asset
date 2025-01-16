@@ -28,3 +28,12 @@ MonoBehaviour:
   - levelNumber: 5
     rows: 5
     columns: 6
+  - levelNumber: 6
+    rows: 6
+    columns: 6
+  - levelNumber: 7
+    rows: 4
+    columns: 8
+  - levelNumber: 8
+    rows: 10
+    columns: 4
