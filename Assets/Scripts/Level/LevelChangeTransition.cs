@@ -40,7 +40,11 @@ public class LevelChangeTransition : MonoBehaviour
         Vector2 bottomTargetPosition = new Vector2(0, -GetScreenHeight() / 4); // Target the center
 
         topImageRect.DOAnchorPos(topTargetPosition, 0.5f).SetEase(Ease.OutQuad);
-        bottomImageRect.DOAnchorPos(bottomTargetPosition, 0.5f).SetEase(Ease.OutQuad);
+        bottomImageRect.DOAnchorPos(bottomTargetPosition, 0.5f).SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+        {
+            ActionController.Instance.showLoadingComplete?.Invoke();
+        });
     }
 
     IEnumerator CompleteLevelTransitionOut()
@@ -56,7 +60,11 @@ public class LevelChangeTransition : MonoBehaviour
 
         topImageRect.DOAnchorPos(topTargetPosition, 1f).SetEase(Ease.OutQuad);
         bottomImageRect.DOAnchorPos(bottomTargetPosition, 1f).SetEase(Ease.OutQuad)
-            .OnComplete(()=> { ActionController.Instance.hideLoadingComplete?.Invoke(); });
+            .OnComplete(()=> {
+                
+                ActionController.Instance.hideLoadingComplete?.Invoke(); 
+            
+            });
     }
 
     private void SetImageSizeAtRuntime()

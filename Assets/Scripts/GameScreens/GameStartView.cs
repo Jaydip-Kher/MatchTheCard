@@ -9,6 +9,7 @@ public class GameStartView : UIScreens
 
     public void Btn_PlayClicked()
     {
+        ActionController.Instance.generateLevel?.Invoke(PlayerController.Instance.currentLevel);
         UIController.Instance.Show(UIScreenName.Gameplay);
     }
 }

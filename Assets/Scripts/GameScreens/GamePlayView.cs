@@ -6,7 +6,7 @@ using UnityEngine;
 public class GamePlayView : UIScreens
 {
     [SerializeField] private GameData gameData;
-    [SerializeField] private CardInfo cardData;
+    [SerializeField] private CardInfo cardInfo;
     [SerializeField] private List<CardSpriteData> cardSprites = new List<CardSpriteData>();
     private HashSet<int> accessedIndices = new HashSet<int>();
 
@@ -33,11 +33,10 @@ public class GamePlayView : UIScreens
         for (int pairIndex = 0; pairIndex < pairCout; pairIndex++)
         {
             int randomIndex = GetRandomIndex();
-            cardSprites.Add(cardData.cardSprites[randomIndex]);
-            cardSprites.Add(cardData.cardSprites[randomIndex]);
+            cardSprites.Add(cardInfo.cardSprites[randomIndex]);
+            cardSprites.Add(cardInfo.cardSprites[randomIndex]);
         }
         Shuffle();
-        Debug.LogError(cardSprites.Count+"card count");
         for (int cardIndex = 0; cardIndex < gameData.gameCards.Count; cardIndex++)
         {
             gameData.gameCards[cardIndex].SetCardImage(cardSprites[cardIndex].cardSprite, cardSprites[cardIndex].pairid);
@@ -56,7 +55,7 @@ public class GamePlayView : UIScreens
 
     private int GetRandomIndex()
     {
-        if (accessedIndices.Count >= cardData.cardSprites.Count)
+        if (accessedIndices.Count >= cardInfo.cardSprites.Count)
         {
             Debug.LogWarning("All indices have been used. Returning -1 or resetting logic.");
             return -1; // Optional: you might want to reset accessedIndices here if needed.
@@ -65,7 +64,7 @@ public class GamePlayView : UIScreens
         int randomIndex;
         do
         {
-            randomIndex = UnityEngine.Random.Range(0, cardData.cardSprites.Count);
+            randomIndex = UnityEngine.Random.Range(0, cardInfo.cardSprites.Count);
         } while (accessedIndices.Contains(randomIndex));
 
         accessedIndices.Add(randomIndex);
@@ -116,5 +115,6 @@ public class GamePlayView : UIScreens
     private void onLoadingComplete()
     {
         ActionController.Instance.onLevelReset();
+        ActionController.Instance.generateLevel?.Invoke(PlayerController.Instance.currentLevel);
     }
 }
