@@ -9,11 +9,15 @@ public class LevelChangeTransition : MonoBehaviour
 
     private void OnEnable()
     {
-
+        ActionManager.Instance.showLoading += MoveIn;
+        ActionManager.Instance.hideLoading += MoveOut;
     }
 
     private void OnDisable()
     {
+        if (ActionManager.Instance == null) return;
+        ActionManager.Instance.showLoading -= MoveIn;
+        ActionManager.Instance.hideLoading -= MoveOut;
     }
     public void MoveOut()
     {
@@ -51,7 +55,8 @@ public class LevelChangeTransition : MonoBehaviour
         Vector2 bottomTargetPosition = new Vector2(0, -GetScreenHeight()); // Move to the bottom off-screen
 
         topImageRect.DOAnchorPos(topTargetPosition, 1f).SetEase(Ease.OutQuad);
-        bottomImageRect.DOAnchorPos(bottomTargetPosition, 1f).SetEase(Ease.OutQuad);
+        bottomImageRect.DOAnchorPos(bottomTargetPosition, 1f).SetEase(Ease.OutQuad)
+            .OnComplete(()=> { ActionManager.Instance.hideLoadingComplete?.Invoke(); });
     }
 
     private void SetImageSizeAtRuntime()
