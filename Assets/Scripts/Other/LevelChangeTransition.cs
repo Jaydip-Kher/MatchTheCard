@@ -1,8 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections;
-
-public class MaskTransition : MonoBehaviour
+public class LevelChangeTransition : MonoBehaviour
 {
     [SerializeField] private RectTransform topImageRect;
     [SerializeField] private RectTransform bottomImageRect;
@@ -10,21 +9,12 @@ public class MaskTransition : MonoBehaviour
 
     private void OnEnable()
     {
+
     }
 
     private void OnDisable()
     {
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-            MoveIn();
-
-        if (Input.GetKeyDown(KeyCode.O))
-            MoveOut();
-    }
-
     public void MoveOut()
     {
         StartCoroutine(CompleteLevelTransitionOut());
