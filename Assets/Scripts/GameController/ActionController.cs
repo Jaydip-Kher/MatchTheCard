@@ -1,6 +1,6 @@
 using System;
 
-public class ActionManager : Singleton<ActionManager>
+public class ActionController : Singleton<ActionController>
 {
     public Action<int> generateLevel;
     public Action levelGenerated;

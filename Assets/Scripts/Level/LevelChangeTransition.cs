@@ -9,15 +9,15 @@ public class LevelChangeTransition : MonoBehaviour
 
     private void OnEnable()
     {
-        ActionManager.Instance.showLoading += MoveIn;
-        ActionManager.Instance.hideLoading += MoveOut;
+        ActionController.Instance.showLoading += MoveIn;
+        ActionController.Instance.hideLoading += MoveOut;
     }
 
     private void OnDisable()
     {
-        if (ActionManager.Instance == null) return;
-        ActionManager.Instance.showLoading -= MoveIn;
-        ActionManager.Instance.hideLoading -= MoveOut;
+        if (ActionController.Instance == null) return;
+        ActionController.Instance.showLoading -= MoveIn;
+        ActionController.Instance.hideLoading -= MoveOut;
     }
     public void MoveOut()
     {
@@ -56,7 +56,7 @@ public class LevelChangeTransition : MonoBehaviour
 
         topImageRect.DOAnchorPos(topTargetPosition, 1f).SetEase(Ease.OutQuad);
         bottomImageRect.DOAnchorPos(bottomTargetPosition, 1f).SetEase(Ease.OutQuad)
-            .OnComplete(()=> { ActionManager.Instance.hideLoadingComplete?.Invoke(); });
+            .OnComplete(()=> { ActionController.Instance.hideLoadingComplete?.Invoke(); });
     }
 
     private void SetImageSizeAtRuntime()
