@@ -11,6 +11,9 @@ public class LevelChangeTransition : MonoBehaviour
     {
         ActionController.Instance.showLoading += MoveIn;
         ActionController.Instance.hideLoading += MoveOut;
+
+        topImageRect.anchoredPosition = new Vector2(0, GetScreenHeight());
+
     }
 
     private void OnDisable()

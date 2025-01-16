@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameStartView : UIScreens
 {
     [SerializeField] private CanvasGroup buttonPlay;
     [SerializeField] private Canvas gamePlayView;
+    [SerializeField] private TextMeshProUGUI textTitle;
 
     public void Btn_PlayClicked()
     {

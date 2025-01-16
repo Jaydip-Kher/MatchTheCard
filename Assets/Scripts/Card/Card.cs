@@ -7,7 +7,6 @@ public class Card : MonoBehaviour
     public int cardId;
     public int spriteId;
     [SerializeField] private Image cardImage;
-
     [SerializeField] private float duration = 0.4f;
     [SerializeField] private float rotationValue = 180;
     [SerializeField] private AudioData audioData;

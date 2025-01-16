@@ -1,17 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 public class GamePlayView : UIScreens
 {
+    [SerializeField] private List<CardSpriteData> cardSprites = new List<CardSpriteData>();
     [SerializeField] private GameData gameData;
     [SerializeField] private CardInfo cardInfo;
-    [SerializeField] private List<CardSpriteData> cardSprites = new List<CardSpriteData>();
     [SerializeField] private AudioData audioData;
     private HashSet<int> accessedIndices = new HashSet<int>();
-
     private System.Random rng = new System.Random();
+
+    public GameObject buttonParent;
+    private bool isSettingPanelActive = false;
 
     private void OnEnable()
     {
@@ -81,7 +83,7 @@ public class GamePlayView : UIScreens
     {
         if (gameData.selectedCards.Count == 2)
         {
-            if (gameData.selectedCards[0].spriteId== gameData.selectedCards[1].spriteId)
+            if (gameData.selectedCards[0].spriteId == gameData.selectedCards[1].spriteId)
             {
                 gameData.selectedCards[0].OnMatched();
                 gameData.selectedCards[1].OnMatched();
@@ -99,8 +101,7 @@ public class GamePlayView : UIScreens
             gameData.selectedCards.Clear();
         }
         bool isLevelCleared = gameData.gameCards.All(card => card.isCardMatched);
-        Debug.LogError(isLevelCleared);
-        if(isLevelCleared)
+        if (isLevelCleared)
         {
             ActionController.Instance.displayScore?.Invoke(onDisplayScoreComplete);
             ActionController.Instance.onLevelComplete?.Invoke();
@@ -126,5 +127,20 @@ public class GamePlayView : UIScreens
     public void ToggleSound()
     {
         AudioController.Instance.ToggleFX();
+    }
+
+    public void Btn_SettingClicked()
+    {
+        if (!isSettingPanelActive)
+        {
+            buttonParent.transform.DOLocalMoveX(0, 0.5f);
+            isSettingPanelActive = true;
+        }
+
+        else
+        {
+            buttonParent.transform.DOLocalMoveX(-300, 0.5f);
+            isSettingPanelActive = false;
+        }
     }
 }

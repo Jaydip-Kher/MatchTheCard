@@ -4,7 +4,7 @@ public class PlayerController : Singleton<PlayerController>
 {
     public int currentLevel = 0;
     public int score = 0;
-    private const string dataFileName = "playerdata.json";
+    private const string dataFileName = "playerstatistics.json";
     private UserData currentUserdData;
     private void OnEnable()
     {
@@ -27,6 +27,7 @@ public class PlayerController : Singleton<PlayerController>
         UserData userData = new UserData(level, score);
         string json = JsonUtility.ToJson(userData, true);
         string filePath = Path.Combine(Application.persistentDataPath, dataFileName);
+        
         File.WriteAllText(filePath, json);
     }
     public void LoadData()

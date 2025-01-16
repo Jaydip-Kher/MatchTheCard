@@ -30,10 +30,16 @@ MonoBehaviour:
     columns: 6
   - levelNumber: 6
     rows: 6
-    columns: 6
+    columns: 4
   - levelNumber: 7
+    rows: 10
+    columns: 2
+  - levelNumber: 8
+    rows: 6
+    columns: 6
+  - levelNumber: 9
     rows: 4
     columns: 8
-  - levelNumber: 8
+  - levelNumber: 10
     rows: 10
     columns: 4
