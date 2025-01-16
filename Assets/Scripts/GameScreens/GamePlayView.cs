@@ -8,6 +8,7 @@ public class GamePlayView : UIScreens
     [SerializeField] private GameData gameData;
     [SerializeField] private CardInfo cardInfo;
     [SerializeField] private List<CardSpriteData> cardSprites = new List<CardSpriteData>();
+    [SerializeField] private AudioData audioData;
     private HashSet<int> accessedIndices = new HashSet<int>();
 
     private System.Random rng = new System.Random();
@@ -85,7 +86,7 @@ public class GamePlayView : UIScreens
                 gameData.selectedCards[0].OnMatched();
                 gameData.selectedCards[1].OnMatched();
                 ActionController.Instance.UpdateScrore?.Invoke(true);
-                Debug.LogError("Play Match AUdio Here");
+                AudioController.Instance.PlayEffect(audioData.cardMatch);
 
             }
             else
@@ -93,7 +94,7 @@ public class GamePlayView : UIScreens
                 gameData.selectedCards[0].FlipToHide();
                 gameData.selectedCards[1].FlipToHide();
                 ActionController.Instance.UpdateScrore?.Invoke(false);
-                Debug.LogError("Play Mismatch AUdio Here");
+                AudioController.Instance.PlayEffect(audioData.cardMismatch);
             }
             gameData.selectedCards.Clear();
         }
@@ -104,7 +105,7 @@ public class GamePlayView : UIScreens
             ActionController.Instance.displayScore?.Invoke(onDisplayScoreComplete);
             ActionController.Instance.onLevelComplete?.Invoke();
             cardSprites.Clear();
-            Debug.LogError("Play Winning AUdio Here");
+            AudioController.Instance.PlayEffect(audioData.gameWin);
 
         }
     }
@@ -116,5 +117,14 @@ public class GamePlayView : UIScreens
     {
         ActionController.Instance.onLevelReset();
         ActionController.Instance.generateLevel?.Invoke(PlayerController.Instance.currentLevel);
+    }
+
+    public void ToggleMusic()
+    {
+        AudioController.Instance.ToggleBG();
+    }
+    public void ToggleSound()
+    {
+        AudioController.Instance.ToggleFX();
     }
 }

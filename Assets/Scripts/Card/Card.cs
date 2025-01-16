@@ -10,6 +10,7 @@ public class Card : MonoBehaviour
 
     [SerializeField] private float duration = 0.4f;
     [SerializeField] private float rotationValue = 180;
+    [SerializeField] private AudioData audioData;
     public bool isCardSpriteSet;
     public bool isCardMatched;
     public RectTransform rectTransform;
@@ -28,7 +29,7 @@ public class Card : MonoBehaviour
     public void OnCardClick()
     {
         FlipToShow();
-        Debug.LogError("Play AUdio Here");
+        AudioController.Instance.PlayEffect(audioData.cardFlip);
     }
     public void FlipToShow()
     {

@@ -152,6 +152,7 @@ MonoBehaviour:
   cardImage: {fileID: 6781865216145537898}
   duration: 0.4
   rotationValue: 180
+  audioData: {fileID: 11400000, guid: 2e36ec5e092fe4d508aac2a24bb056ee, type: 2}
   isCardSpriteSet: 0
   isCardMatched: 0
   rectTransform: {fileID: 0}
