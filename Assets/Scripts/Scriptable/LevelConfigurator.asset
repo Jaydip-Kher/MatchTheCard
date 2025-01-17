@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelConfigurator
   m_EditorClassIdentifier: 
   levelInfo:
-  - levelNumber: 0
+  - levelNumber: 1
     rows: 2
     columns: 2
   - levelNumber: 2

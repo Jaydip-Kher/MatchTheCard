@@ -48,6 +48,9 @@ public class LevelBuilder : MonoBehaviour
     /// </summary>
     private void CommenceLevelCreation(int levelIndex)
     {
+        if (levelIndex == 10)
+            levelIndex = 4;
+
         activeLevelData = levelConfigurator.levelInfo[levelIndex];
         layoutGroup.constraintCount = activeLevelData.columns;
 

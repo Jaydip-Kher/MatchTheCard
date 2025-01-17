@@ -11,6 +11,7 @@ public class PlayerController : Singleton<PlayerController>
         currentUserdData = new UserData(0, 0);
         LoadData();
         ActionController.Instance.onLevelComplete += OnLevelComplete;
+
     }
     private void OnDisable()
     {
@@ -20,6 +21,10 @@ public class PlayerController : Singleton<PlayerController>
     private void OnLevelComplete()
     {
         currentLevel++;
+
+        if (currentLevel == 10)
+            currentLevel = 4;
+
         SaveData(currentLevel, ScoreConfigController.Instance.GetCurrentScore());
     }
     public void SaveData(int level, int score)
