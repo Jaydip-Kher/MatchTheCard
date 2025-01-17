@@ -16,8 +16,6 @@ public class ScoreDisplay : MonoBehaviour
     {
         if (ActionController.Instance == null) return;
         ActionController.Instance.displayScore -= displayScore;
-
-
     }
     private void displayScore(Action callBack)
     {
@@ -29,6 +27,7 @@ public class ScoreDisplay : MonoBehaviour
         // Animates the score from `fromScore` to `toScore` over 0.5 seconds
         DOVirtual.Int(fromScore, toScore, 0.5f, value =>
         {
+            transform.GetComponent<Animation>().Play();
             UpdateScoreText(value);
         }).SetEase(Ease.Linear).OnComplete(OnCompleteDisplayScore);
     }
